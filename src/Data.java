@@ -81,32 +81,35 @@ public class Data {
     }
 
     public void deleteStudent(String firstName, String lastName, int roll) {
+        updateLog("Deleted Student");
         for (int i = 0; i < studentList.size(); i++) {
             Student currStudent = studentList.get(i);
             if (currStudent.firstName.equals(firstName) && currStudent.lastName.equals(lastName) && currStudent.roll == roll) {
                 studentList.remove(i);
                 recycleBin.push(currStudent);
-                updateLog("Deleted Student");
+                updateFile();
                 return;
             }
         }
     }
 
     public Student searchStudent(String firstName, String lastName, int roll) {
+        updateLog("Search Student");
         for (Student student : studentList) {
             if (student.firstName.equals(firstName) && student.lastName.equals(lastName) && student.roll == roll) {
                 return student;
             }
         }
-        updateLog("Search Student");
         return null;
     }
 
     public void modifyStudentByRoll(Student student) {
+        updateLog("Modify Student");
         for (int i = 0; i < studentList.size(); i++) {
             Student currStudent = studentList.get(i);
             if (student.roll == currStudent.roll) {
                 studentList.set(i, student);
+                updateFile();
                 return;
             }
         }
